@@ -32,18 +32,19 @@ module.exports = {
     'indent': ['warn', 4],
     'curly': 'error',
     'block-spacing': 'warn',
-    'linebreak-style': ['error', 'unix'],
-    'no-trailing-spaces': "error",
-    "object-curly-newline": ["error", {
-        "ObjectExpression": { "multiline": true },
-        "ObjectPattern": { "multiline": true },
-        "ImportDeclaration": "never",
-        "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+    'linebreak-style': ['warn', 'windows'],
+    'no-trailing-spaces': 'error',
+    'object-curly-newline': ['error', {
+        'ObjectExpression': { 'multiline': true },
+        'ObjectPattern': { 'multiline': true },
+        'ImportDeclaration': 'never',
+        'ExportDeclaration': { 'multiline': true, 'minProperties': 3 }
     }],
-    'object-curly-spacing': ["error", "always"],
-    "semi": "warn",
-    "space-before-blocks": "warn",
-    "@typescript-eslint/strict-boolean-expressions": "warn",
-    "@typescript-eslint/prefer-nullish-coalescing": "warn",
+    'object-curly-spacing': ['error', 'always'],
+    'semi': 'warn',
+    'space-before-blocks': 'warn',
+    '@typescript-eslint/strict-boolean-expressions': 'warn',
+    '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+    '@typescript-eslint/ban-ts-comment': 'off'
   },
 }
