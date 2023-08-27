@@ -1,4 +1,4 @@
-import GamePage from './pages/GamePage';
+import NotFoundPage from './pages/NotFoundPage';
 import './index.css';
 
 function App() {
@@ -6,7 +6,8 @@ function App() {
     return (
         <div>
             {/* <MainPage /> */}
-            <GamePage />
+            {/* <GamePage /> */}
+            <NotFoundPage />
         </div>
     );
 }
