@@ -1,11 +1,12 @@
-import MainPage from './pages/MainPage/index';
+import GamePage from './pages/GamePage';
 import './index.css';
 
 function App() {
 
     return (
         <div>
-            <MainPage />
+            {/* <MainPage /> */}
+            <GamePage />
         </div>
     );
 }

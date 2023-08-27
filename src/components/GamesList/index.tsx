@@ -4,7 +4,7 @@ import { PaginationConfig } from 'antd/es/pagination';
 // eslint-disable-next-line
 //@ts-ignore
 // eslint-disable-next-line
-function GamesList({games: unknown}) {
+function GamesList({games}) {
 
     const paginationConfig: PaginationConfig = {
         position:'bottom',
