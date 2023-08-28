@@ -1,5 +1,7 @@
 import { Row, Col, Typography, Descriptions, Carousel, Image } from 'antd';
-import { BackButton } from '../../components/BackButton';
+import BackButton from '../../components/BackButton';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function GamePage() {
 
@@ -119,6 +121,12 @@ function GamePage() {
         },
     ];
 
+    const { id } = useParams<{ id: string }>();
+
+    useEffect(() => {
+        // тут запросить данные по игрушке { id }
+    }, []);
+
     return (
         <>
             <Row justify={'center'}>
@@ -128,25 +136,34 @@ function GamePage() {
             </Row>
             <Row justify={'center'}>
                 <Col xl={12}>
-                    <Descriptions title="Additional information" items={info} />
+                    <Descriptions
+                        column={{ xs:2, sm: 2, xl:3, xxl:3 }}
+                        title="Additional information"
+                        items={info}
+                    />
                 </Col>
             </Row>
             <Row justify={'center'}>
                 <Col xl={12}>
                     <Carousel autoplay>
-                        {screenshots?.map( el =>
+                        {screenshots?.map( screenshot =>
                             <Image
-                                key={el.id}
+                                key={screenshot.id}
                                 alt={title}
-                                src={el.image}
+                                src={screenshot.image}
                             />
-                            )}
+                        )}
                     </Carousel>
                 </Col>
             </Row>
             <Row justify={'center'}>
                 <Col xl={12}>
-                    <Descriptions column={{ xs:1, sm: 2, xl:2, xxl:2 }} layout={'vertical'} title="Minimum System Requirements" items={system} />
+                    <Descriptions
+                        column={{ xs:1, sm: 2, xl:2, xxl:2 }}
+                        layout={'vertical'}
+                        title="Minimum System Requirements"
+                        items={system}
+                    />
                 </Col>
             </Row>
             <Row justify={'center'}>

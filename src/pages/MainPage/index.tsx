@@ -1,8 +1,11 @@
 import { Typography, Select, Divider, Space, Row, Col } from 'antd';
-import GamesList from '../../components/GamesList';
 import Link from 'antd/es/typography/Link';
+import { Suspense, lazy } from 'react';
+import Spinner from '../../components/Spinner';
 
 const { Title, Paragraph } = Typography;
+
+const GamesListLazy = lazy(() => import('../../components/GamesList'));
 
 function MainPage() {
 
@@ -115,7 +118,9 @@ function MainPage() {
                 </Space>
             </Row>
             <Divider>Games List Below</Divider>
-            <GamesList games={data}/>
+            <Suspense fallback={<Spinner />}>
+                <GamesListLazy games={data}/>
+            </Suspense>
         </div>
     );
 }
