@@ -24,7 +24,7 @@
     justify-self: flex-start;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (width <= 768px){
     .container{
         width: 365px;
         row-gap: 16px;

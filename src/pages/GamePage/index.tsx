@@ -56,7 +56,7 @@ function GamePage() {
         genre,
         platform,
         screenshots
-     } = data;
+    } = data;
 
     const info = [
         {

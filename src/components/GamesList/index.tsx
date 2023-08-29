@@ -19,7 +19,7 @@ function GamesList({games}) {
                 dataSource={games}
                 renderItem={(item) => (
                     <List.Item>
-                        <div style={{margin: '0 auto'}}>
+                        <div style={{ margin: '0 auto' }}>
                             <GameCard data={item}/>
                         </div>
                     </List.Item>

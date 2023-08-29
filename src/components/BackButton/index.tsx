@@ -12,7 +12,7 @@ function BackButton() {
     };
 
     return (
-        <Button 
+        <Button
             onClick={handleClick}
             type='primary'
             size='large'

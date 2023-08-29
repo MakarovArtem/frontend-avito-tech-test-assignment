@@ -5,6 +5,8 @@ import MainPage from './pages/MainPage';
 import './index.css';
 import GamePage from './pages/GamePage';
 import ErrorPage from './pages/ErrorPage';
+import { Provider as StoreProvider } from 'react-redux';
+import { reduxStore } from './redux/store';
 
 export enum Routes {
     MAIN = '/',
@@ -26,6 +28,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <StoreProvider store={reduxStore}>
+            <RouterProvider router={router} />
+        </StoreProvider>
     </React.StrictMode>,
 );
