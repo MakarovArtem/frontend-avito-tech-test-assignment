@@ -27,9 +27,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <StoreProvider store={reduxStore}>
             <RouterProvider router={router} />
         </StoreProvider>
-    </React.StrictMode>,
+    // </React.StrictMode>,
 );

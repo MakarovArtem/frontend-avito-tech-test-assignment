@@ -27,6 +27,7 @@ export interface SystemRequirements {
     storage: string;
 }
 
+
 export interface GameDetailed {
     id: number;
     title: string;

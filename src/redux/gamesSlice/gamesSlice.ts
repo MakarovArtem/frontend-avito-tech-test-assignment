@@ -1,17 +1,19 @@
-import { createSlice, SerializedError, type PayloadAction } from '@reduxjs/toolkit';
-import { GamesList } from '../stateSchema';
-import { fetchGamesWithQueryParams } from './thunks';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { GameDetailed, GamesList } from '../stateSchema';
+import { fetchGames, fetchGameById } from './thunks';
 
 interface GamesState {
     games: GamesList;
+    game: GameDetailed | null;
     params: string[];
     loading: boolean;
-    error: string;
+    error: string | undefined;
 }
 
 const initialState: GamesState = {
     games: [],
-    params: [],
+    game: null,
+    params: ['platform=browser'],
     loading: false,
     error: '',
 };
@@ -33,20 +35,30 @@ export const gamesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchGamesWithQueryParams.pending, (state) => {
+            .addCase(fetchGames.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(fetchGamesWithQueryParams.fulfilled, (state, action: PayloadAction<GamesList>) => {
+            .addCase(fetchGames.fulfilled, (state, action: PayloadAction<GamesList>) => {
                 state.loading = false;
                 state.games = action.payload;
             })
-            .addCase(fetchGamesWithQueryParams.rejected, (state, action) => {
+            .addCase(fetchGames.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })
+            .addCase(fetchGameById.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchGameById.fulfilled, (state, action: PayloadAction<GameDetailed>) => {
+                state.loading = false;
+                state.game = action.payload;
+            })
+            .addCase(fetchGameById.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            });
     },
 });
-
 
 export const { actions: gamesActions } = gamesSlice;
 export const { reducer: gamesReducer } = gamesSlice;
