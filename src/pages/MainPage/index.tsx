@@ -4,6 +4,7 @@ import { Suspense, lazy, useEffect } from 'react';
 import Spinner from '../../components/Spinner';
 import { useDispatch, useSelector } from '../../redux/store';
 import { fetchGames } from '../../redux/gamesSlice/thunks';
+import TransformList from '../../components/Select';
 
 const { Title, Paragraph } = Typography;
 
@@ -13,13 +14,41 @@ function MainPage() {
 
     const dispatch = useDispatch();
     const games = useSelector(state => state.games.games);
+    const state = useSelector(state => state);
     const params = useSelector(state => state.games.params);
 
     useEffect(() => {
         dispatch(fetchGames(null))
             .then(() => console.log('games fetched'))
             .catch(() => console.log('error happened'));
+        console.log(state)
     }, [params, dispatch]);
+
+    const platrofrmOptions = [
+        { value: 'notChosen', label: 'not chosen' },
+        { value: 'browser', label: 'Browser' },
+        { value: 'pc', label: 'PC' },
+        // { value: 'mobile', label: 'Mobile', },
+    ];
+
+    const categoryOptions = [
+        { value: 'notChosen', label: 'not chosen' },
+        { value: 'mmorpg', label: 'mmorpg' },
+        { value: 'shooter', label: 'shooter' },
+        { value: 'strategy', label: 'strategy' },
+        { value: 'moba', label: 'moba' },
+        { value: 'racing', label: 'racing' },
+        { value: 'sports', label: 'sports' },
+        { value: 'social', label: 'social' },
+    ];
+    // release-date, popularity, alphabetical or relevance
+    const sortyOptions = [
+        { value: 'notChosen', label: 'not chosen' },
+        { value: 'release-date', label: 'Release date' },
+        { value: 'popularity', label: 'Popularity' },
+        { value: 'alphabetical', label: 'Alphabetical' },
+        { value: 'relevance', label: 'Relevance' },
+    ];
 
     return (
         <div>
@@ -36,41 +65,20 @@ function MainPage() {
             <Divider />
             <Row justify={'center'}>
                 <Space align='center'>
-                    <Paragraph>Filter by genre</Paragraph>
-                    <Select
-                        defaultValue='notChosen'
-                        style={{ width: 240 }}
-                        onChange={(value) => console.log(value)}
-                        options={[
-                            { value: 'notChosen', label: 'not chosen' },
-                            { value: 'shooter', label: 'Shooter' },
-                            { value: 'horror', label: 'Horror' },
-                            { value: 'rpg', label: 'RPG', },
-                        ]}
+                    <TransformList
+                        type={'filter'}
+                        filterBy={'platform'}
+                        options={platrofrmOptions}
+                        defaultOption={'browser'}
                     />
-                    <Paragraph>Filter by platform</Paragraph>
-                    <Select
-                        defaultValue='notChosen'
-                        style={{ width: 240 }}
-                        onChange={(value) => console.log(value)}
-                        options={[
-                            { value: 'notChosen', label: 'not chosen' },
-                            { value: 'web', label: 'WEB' },
-                            { value: 'pc', label: 'PC' },
-                            { value: 'mobile', label: 'Mobile', },
-                        ]}
+                    <TransformList
+                        type={'filter'}
+                        filterBy={'category'}
+                        options={categoryOptions}
                     />
-                    <Paragraph>Sort by</Paragraph>
-                    <Select
-                        defaultValue='notChosen'
-                        style={{ width: 240 }}
-                        onChange={(value) => console.log(value)}
-                        options={[
-                            { value: 'notChosen', label: 'not chosen' },
-                            { value: 'rating', label: 'Rating' },
-                            { value: 'date', label: 'Release date' },
-                            { value: 'free', label: 'Free or not', },
-                        ]}
+                    <TransformList
+                        type='sort'
+                        options={sortyOptions}
                     />
                 </Space>
             </Row>

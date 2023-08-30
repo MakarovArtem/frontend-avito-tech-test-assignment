@@ -2,10 +2,12 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { GameDetailed, GamesList } from '../stateSchema';
 import { fetchGames, fetchGameById } from './thunks';
 
+type Param = Record<string, string>
+
 interface GamesState {
     games: GamesList;
     game: GameDetailed | null;
-    params: string[];
+    params: Param;
     loading: boolean;
     error: string | undefined;
 }
@@ -13,7 +15,7 @@ interface GamesState {
 const initialState: GamesState = {
     games: [],
     game: null,
-    params: ['platform=browser'],
+    params: {},
     loading: false,
     error: '',
 };
@@ -22,12 +24,13 @@ export const gamesSlice = createSlice({
     name: 'games',
     initialState,
     reducers: {
-        setQueryParams: (state, action: PayloadAction<string>) => {
-            const newParam = action.payload;
-            const newParamKey = newParam.split('=')[0];
-            state.params = state.params.map( oldParam => {
-                return oldParam.startsWith(newParamKey) ? newParam : oldParam;
-            });
+        addQueryParam: (state, action: PayloadAction<string[]>) => {
+            const [ paramKey, paramValue ] = action.payload;
+            state.params = { ...state.params, [paramKey]: paramValue };
+        },
+        removeQueryParam: (state, action: PayloadAction<string>) => {
+            const paramKey = action.payload;
+            delete state.params[paramKey];
         },
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;

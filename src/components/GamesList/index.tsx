@@ -5,7 +5,7 @@ import { PaginationConfig } from 'antd/es/pagination';
 function GamesList({ games }): JSX.Element {
 
     const paginationConfig: PaginationConfig = {
-        position:'bottom',
+        position:'both',
         align: 'center',
         pageSize: 5
     };
