@@ -40,7 +40,7 @@ function TransformList(props: TransformListPorps): JSX.Element {
             dispatch(gamesActions.removeQueryParam(key));
         }
         dispatch(gamesActions.addQueryParam([key, value]));
-    }
+    };
 
     return (
         <>

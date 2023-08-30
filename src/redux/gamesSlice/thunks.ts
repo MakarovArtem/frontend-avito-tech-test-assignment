@@ -11,7 +11,7 @@ export const fetchGames = createAsyncThunk<GamesList, string, { state: ReduxStat
     async function (_, thunkAPI) {
         try {
             const params = thunkAPI.getState().games.params;
-            const queryString = Object.entries(params).map( param => param.join('=')).join('&')
+            const queryString = Object.entries(params).map( param => param.join('=')).join('&');
             // console.log('queryString', queryString);
             const response = await fetch(URL + 'games?' + queryString, {
                 headers: {
@@ -25,7 +25,7 @@ export const fetchGames = createAsyncThunk<GamesList, string, { state: ReduxStat
             const data = await response.json() as GamesList;
             return data;
         } catch (error) {
-            console.log('error in fetchGames')
+            console.log('error in fetchGames');
             return thunkAPI.rejectWithValue(error.message);
         }
     }
@@ -41,10 +41,12 @@ export const fetchGameById = createAsyncThunk<GameDetailed, string, { state: Red
                     'X-RapidAPI-Host': HOST
                 }
             });
+            console.log('response: ', response);
             if (!response.ok) {
                 throw new Error('Server Error!');
             }
             const data = await response.json() as GameDetailed;
+            console.log('data: ', data);
             return data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);

@@ -1,4 +1,4 @@
-import { Typography, Select, Divider, Space, Row, Col } from 'antd';
+import { Typography, Divider, Space, Row, Col } from 'antd';
 import Link from 'antd/es/typography/Link';
 import { Suspense, lazy, useEffect } from 'react';
 import Spinner from '../../components/Spinner';
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from '../../redux/store';
 import { fetchGames } from '../../redux/gamesSlice/thunks';
 import TransformList from '../../components/Select';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 const GamesListLazy = lazy(() => import('../../components/GamesList'));
 
@@ -14,21 +14,18 @@ function MainPage() {
 
     const dispatch = useDispatch();
     const games = useSelector(state => state.games.games);
-    const state = useSelector(state => state);
     const params = useSelector(state => state.games.params);
 
     useEffect(() => {
-        dispatch(fetchGames(null))
+        dispatch(fetchGames(''))
             .then(() => console.log('games fetched'))
             .catch(() => console.log('error happened'));
-        console.log(state)
     }, [params, dispatch]);
 
     const platrofrmOptions = [
         { value: 'notChosen', label: 'not chosen' },
         { value: 'browser', label: 'Browser' },
         { value: 'pc', label: 'PC' },
-        // { value: 'mobile', label: 'Mobile', },
     ];
 
     const categoryOptions = [
@@ -41,7 +38,7 @@ function MainPage() {
         { value: 'sports', label: 'sports' },
         { value: 'social', label: 'social' },
     ];
-    // release-date, popularity, alphabetical or relevance
+
     const sortyOptions = [
         { value: 'notChosen', label: 'not chosen' },
         { value: 'release-date', label: 'Release date' },

@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import { Card, Image, Typography, Space } from 'antd';
 import style from './style.module.css';
+import { Game } from '../../redux/stateSchema';
 
 const { Title, Paragraph } = Typography;
-// eslint-disable-next-line
-function GameCard(props: unknown) {
+
+interface GameCardProps {
+    data: Game
+}
+
+function GameCard({ data }: GameCardProps): JSX.Element {
 
     const {
         thumbnail,
@@ -13,7 +18,7 @@ function GameCard(props: unknown) {
         publisher,
         genre,
         id,
-    } = props.data;
+    } = data;
 
     return (
         <Card extra={<Link to={`/game/${id}`}>{title}</Link>}>

@@ -1,8 +1,13 @@
 import { List } from 'antd';
 import GameCard from '../GameCard/index';
 import { PaginationConfig } from 'antd/es/pagination';
+import { GamesList as GamesListType } from '../../redux/stateSchema';
 
-function GamesList({ games }): JSX.Element {
+interface GamesListProps {
+    games: GamesListType
+}
+
+function GamesList({ games }: GamesListProps): JSX.Element {
 
     const paginationConfig: PaginationConfig = {
         position:'both',
@@ -14,7 +19,7 @@ function GamesList({ games }): JSX.Element {
         <>
             <List
                 pagination={paginationConfig}
-                dataSource={games}
+                dataSource={ games }
                 renderItem={ game => (
                     <List.Item>
                         <div style={{ margin: '0 auto' }}>

@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useParams } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import './index.css';
 import GamePage from './pages/GamePage';
 import ErrorPage from './pages/ErrorPage';
 import { Provider as StoreProvider } from 'react-redux';
-import { reduxStore } from './redux/store';
+import { reduxStore, useDispatch } from './redux/store';
+import { fetchGameById } from './redux/gamesSlice/thunks';
 
 export enum Routes {
     MAIN = '/',
@@ -28,8 +29,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     // <React.StrictMode>
-        <StoreProvider store={reduxStore}>
-            <RouterProvider router={router} />
-        </StoreProvider>
+    <StoreProvider store={reduxStore}>
+        <RouterProvider router={router} />
+    </StoreProvider>
     // </React.StrictMode>,
 );
