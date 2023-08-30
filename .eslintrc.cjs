@@ -40,11 +40,12 @@ module.exports = {
         'ImportDeclaration': 'never',
         'ExportDeclaration': { 'multiline': true, 'minProperties': 3 }
     }],
-    'object-curly-spacing': ['error', 'always'],
+    'object-curly-spacing': ['warn', 'always'],
     'semi': 'warn',
     'space-before-blocks': 'warn',
     '@typescript-eslint/strict-boolean-expressions': 'warn',
     '@typescript-eslint/prefer-nullish-coalescing': 'warn',
-    '@typescript-eslint/ban-ts-comment': 'off'
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'react-hooks/exhaustive-deps': 'error'
   },
 }
