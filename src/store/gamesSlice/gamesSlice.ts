@@ -12,44 +12,6 @@ export interface GamesState {
     error: string | undefined;
 }
 
-// const gameDetailedInitial = {
-//     requestTime: Date.now(),
-//     id: 0,
-//     title: '',
-//     thumbnail: '',
-//     status: '',
-//     short_description: '',
-//     description: '',
-//     game_url: '',
-//     genre: '',
-//     platform: '',
-//     publisher: '',
-//     developer: '',
-//     release_date: '',
-//     freetogame_profile_url: '',
-//     minimum_system_requirements: {
-//         os: '',
-//         processor: '',
-//         memory: '',
-//         graphics: '',
-//         storage: ''
-//     },
-//     screenshots: [
-//         {
-//             id: 0,
-//             image: ''
-//         },
-//         {
-//             id: 0,
-//             image: ''
-//         },
-//         {
-//             id: 0,
-//             image: ''
-//         }
-//     ]
-// };
-
 const initialState: GamesState = {
     games: [],
     gamesDetailed: [],
@@ -73,9 +35,6 @@ export const gamesSlice = createSlice({
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
-        pushGame: (state, action: PayloadAction<GameDetailed>) => {
-            state.games.gamesDetailed.push(action.payload);
-        }
     },
     extraReducers: (builder) => {
         builder
@@ -93,9 +52,9 @@ export const gamesSlice = createSlice({
             .addCase(fetchGameById.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(fetchGameById.fulfilled, (state) => {
+            .addCase(fetchGameById.fulfilled, (state, action: PayloadAction<GameDetailed>) => {
                 state.loading = false;
-                // state.gamesDetailed.push(action.payload);
+                state.gamesDetailed.push(action.payload);
             })
             .addCase(fetchGameById.rejected, (state, action) => {
                 state.loading = false;
