@@ -12,44 +12,6 @@ export interface GamesState {
     error: string | undefined;
 }
 
-// const gameDetailedInitial = {
-//     requestTime: Date.now(),
-//     id: 0,
-//     title: '',
-//     thumbnail: '',
-//     status: '',
-//     short_description: '',
-//     description: '',
-//     game_url: '',
-//     genre: '',
-//     platform: '',
-//     publisher: '',
-//     developer: '',
-//     release_date: '',
-//     freetogame_profile_url: '',
-//     minimum_system_requirements: {
-//         os: '',
-//         processor: '',
-//         memory: '',
-//         graphics: '',
-//         storage: ''
-//     },
-//     screenshots: [
-//         {
-//             id: 0,
-//             image: ''
-//         },
-//         {
-//             id: 0,
-//             image: ''
-//         },
-//         {
-//             id: 0,
-//             image: ''
-//         }
-//     ]
-// };
-
 const initialState: GamesState = {
     games: [],
     gamesDetailed: [],

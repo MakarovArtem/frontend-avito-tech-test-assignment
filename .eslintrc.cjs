@@ -14,7 +14,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'jest.config.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -34,7 +34,7 @@ module.exports = {
     'block-spacing': 'warn',
     'linebreak-style': ['warn', 'windows'],
     'no-trailing-spaces': 'error',
-    'object-curly-newline': ['error', {
+    'object-curly-newline': ['warn', {
         'ObjectExpression': { 'multiline': true },
         'ObjectPattern': { 'multiline': true },
         'ImportDeclaration': 'never',

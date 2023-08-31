@@ -26,7 +26,8 @@ export const fetchGameById = createAsyncThunk<GameDetailed, number, { state: Red
                 return currentGame;
             }
         }
-        const updatedGame = await getGameById(id);
-        return { ...updatedGame, requestTime: Date.now() };
+        const game = await getGameById(id);
+        const updatedGame = { ...game, requestTime: Date.now() };
+        return updatedGame;
     }
 );
