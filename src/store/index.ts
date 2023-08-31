@@ -16,9 +16,3 @@ export {
     fetchGames,
     fetchGameById,
 } from './gamesSlice/thunks';
-export {
-    getGame,
-    getGames,
-    getParams,
-    getLoading
-} from './gamesSlice/selectors';

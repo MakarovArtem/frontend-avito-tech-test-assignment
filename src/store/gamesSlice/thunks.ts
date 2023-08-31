@@ -22,6 +22,30 @@ export const fetchGames = createAsyncThunk<GamesList, string, { state: ReduxStat
     }
 );
 
+// const refreshGame = useCallback((id: string) => {
+// dispatch(fetchGameById(id));
+//     dispatch(gamesActions.addGameToSessionStorage(id));
+// }, [dispatch]);
+
+// const getGame = useCallback((id: string, lifetime: number): void => {
+//     const currentTime = Date.now();
+//     const data = sessionStorage.getItem(id);
+//     if(data === null) {
+//         refreshGame(id);
+//     } else {
+//         const { requestTime } = data;
+//         const timeInterval = currentTime - +requestTime;
+//         if(timeInterval > lifetime) {
+//             refreshGame(id);
+//         } else {
+//             dispatch(gamesActions.extractGameFromSessionStorage(id));
+//         }
+//     }
+// }, [refreshGame, dispatch]);
+
+
+
+
 export const fetchGameById = createAsyncThunk<GameDetailed, string, { state: ReduxState }>(
     'games/fetchGameById',
     async function (id: string) {

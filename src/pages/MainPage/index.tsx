@@ -1,7 +1,7 @@
 import { Typography, Divider, Space, Row, Col } from 'antd';
 import { useEffect } from 'react';
 import { GamesList, Spinner, TransformList } from '../../components';
-import { useDispatch, useSelector, fetchGames, getGames, getParams, getLoading } from '../../store';
+import { useDispatch, useSelector, fetchGames } from '../../store';
 
 const { Title } = Typography;
 
@@ -57,7 +57,6 @@ function MainPage() {
                         type={'filter'}
                         filterBy={'platform'}
                         options={platrofrmOptions}
-                        defaultOption={'browser'}
                     />
                     <TransformList
                         type={'filter'}

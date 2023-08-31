@@ -3,6 +3,7 @@ import { Suspense, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector, fetchGameById, gamesActions } from '../../store';
 import { Col, Divider, Row, Typography } from 'antd';
 import { Spinner, GameInfo } from '../../components/';
+import { SessionState } from '../../store/stateSchema';
 
 const { Title } = Typography;
 const TIME_BEFORE_REFRESHING = 5 * 60 * 1000;
@@ -14,30 +15,18 @@ function GamePage() {
     const loading = useSelector(state => state.games.loading);
     const dispatch = useDispatch();
 
-    const refreshGame = useCallback((id: string) => {
-        dispatch(fetchGameById(id));
-        dispatch(gamesActions.addGameToSessionStorage(id));
-    }, [dispatch]);
-
-    const getGame = useCallback((id: string, lifetime: number): void => {
-        const currentTime = Date.now();
-        const data = sessionStorage.getItem(id);
-        if(data === null) {
-            refreshGame(id);
-        } else {
-            const { requestTime } = data;
-            const timeInterval = currentTime - +requestTime;
-            if(timeInterval > lifetime) {
-                refreshGame(id);
-            } else {
-                dispatch(gamesActions.extractGameFromSessionStorage(id));
-            }
-        }
-    }, [refreshGame, dispatch]);
-
     useEffect(() => {
-        getGame(id, TIME_BEFORE_REFRESHING);
-    }, [id, dispatch, getGame]);
+        // const gameSessionStorage = sessionStorage.getItem(id);
+        // const requestTime = gameSessionStorage?.requestTime;
+        // const currentTime = Date.now();
+        // const timeInterval = currentTime - +requestTime;
+        // if(gameSessionStorage !== null || timeInterval > TIME_BEFORE_REFRESHING) {
+            dispatch(fetchGameById(id));
+        //     dispatch(gamesActions.addGameToSessionStorage(id));
+        // } else {
+        //     dispatch(gamesActions.extractGameFromSessionStorage(id));
+        // }
+    }, [id, dispatch]);
 
     return (
         <div style={{ padding: '18px' }}>
@@ -50,12 +39,12 @@ function GamePage() {
             </Row>
             <Divider />
             {/* <Suspense fallback={<Spinner />}> */}
-                <Row justify={'center'}>
-                    <Col xs={12} sm={12} xl={12}>
-                        {/* <GameInfo game={game} /> */}
-                        {loading ? <Spinner /> : <GameInfo game={game} />}
-                    </Col>
-                </Row>
+            <Row justify={'center'}>
+                <Col xs={12} sm={12} xl={12}>
+                    {/* <GameInfo game={game} /> */}
+                    {loading ? <Spinner /> : <GameInfo game={game} />}
+                </Col>
+            </Row>
             {/* </Suspense> */}
         </div>
     );
