@@ -1,7 +1,8 @@
-import { Row, Col, Typography, Descriptions, Carousel, Image } from 'antd';
 import { GameDetailed } from '../../store';
 import { BackButton } from '../index';
 import { convertDate } from '../../utils/convertDate';
+import { Row, Col, Typography, Descriptions, Carousel, Image } from 'antd';
+
 const { Title } = Typography;
 
 interface GameInfoProps {
@@ -75,15 +76,21 @@ export function GameInfo({ game }: GameInfoProps): JSX.Element {
 
     return (
         <div>
-            <Row justify={'center'}>
-                <Col>
+            <Row gutter={12} justify={'start'}>
+                <Col xs={12}>
+                    <Image
+                        alt={game?.title}
+                        src={game?.thumbnail}
+                    />
+                </Col>
+                <Col xs={12}>
                     <Title level={2}>{game?.title}</Title>
                 </Col>
             </Row>
             <Row justify={'center'}>
                 <Col>
                     <Descriptions
-                        column={{ xs:2, sm: 2, xl:3, xxl:3 }}
+                        column={{ xs:1, sm: 2, md:2, lg:3 }}
                         title="Additional information"
                         items={additionalInfo}
                     />
@@ -93,7 +100,6 @@ export function GameInfo({ game }: GameInfoProps): JSX.Element {
                 <Col>
                     <Title level={5}>Screenshots galery</Title>
                     <Carousel
-                        style={{ height: '100%' }}
                         dotPosition={'left'}
                     >
                         {game?.screenshots.map( screenshot =>
@@ -116,7 +122,7 @@ export function GameInfo({ game }: GameInfoProps): JSX.Element {
             <Row justify={'center'}>
                 <Col>
                     <Descriptions
-                        column={{ xs:1, sm: 2, xl:2, xxl:2 }}
+                        column={{ xs:1, sm: 2, md:2, }}
                         layout={'vertical'}
                         title="Minimum system requirements"
                         items={systemRequirements}

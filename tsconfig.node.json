@@ -1,11 +1,11 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true,
-    "strictNullChecks": true
-  },
-  "include": ["vite.config.ts", "jest.config.cjs"]
+    "compilerOptions": {
+        "composite": true,
+        "skipLibCheck": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowSyntheticDefaultImports": true,
+        "strictNullChecks": true
+    },
+    "include": ["vite.config.ts", "jest.config.cjs"]
 }

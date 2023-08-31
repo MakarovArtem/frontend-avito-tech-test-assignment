@@ -12,7 +12,6 @@ export const getGameById = async (id: number) => {
         }
     });
     const gameDetailed = await response.json() as GameDetailed;
-    console.log('gameDetailed from getGameById: ', gameDetailed)
     return gameDetailed;
 };
 

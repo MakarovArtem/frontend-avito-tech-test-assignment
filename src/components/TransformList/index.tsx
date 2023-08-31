@@ -1,5 +1,5 @@
-import { Select as SelectAntd, Typography } from 'antd';
 import { useDispatch, gamesActions } from '../../store';
+import { Select as SelectAntd, Typography } from 'antd';
 
 const { Paragraph } = Typography;
 

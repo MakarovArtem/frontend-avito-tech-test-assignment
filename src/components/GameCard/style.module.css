@@ -1,5 +1,12 @@
 .card{
-    background-color: #555;
+    background-color: rgb(133 214 254);
+    transition: 0.5s ease;
+}
+
+.card:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+    box-shadow: 0 0 11px 10px rgba(2 144 253 / 20%);
 }
 
 .container{
@@ -37,5 +44,13 @@
             'img'
             'info';
         grid-template-columns: 365px;
+    }
+}
+
+@media screen and (width <= 576px){
+    .container{
+        width: 260px;
+        row-gap: 12px;
+        grid-template-columns: 260px;
     }
 }

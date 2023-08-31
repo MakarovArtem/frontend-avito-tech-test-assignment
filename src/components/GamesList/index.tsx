@@ -1,6 +1,6 @@
-import { List } from 'antd';
-import { GameCard } from '../index';
 import { GamesList as GamesListType } from '../../store';
+import { GameCard } from '../index';
+import { List } from 'antd';
 
 interface GamesListProps {
     games: GamesListType

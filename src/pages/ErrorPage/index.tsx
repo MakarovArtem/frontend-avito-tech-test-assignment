@@ -1,9 +1,10 @@
-import { Typography, Card, Row, Col } from 'antd';
-import { BackButton } from '../../components';
 import { useRouteError } from 'react-router-dom';
+import { BackButton } from '../../components';
+import { Typography, Card, Row, Col } from 'antd';
+
 const { Paragraph } = Typography;
 
-const ErrorPage = () => {
+export function ErrorPage() {
 
     const error = useRouteError();
 
@@ -25,6 +26,4 @@ const ErrorPage = () => {
             </Col>
         </Row>
     );
-};
-
-export default ErrorPage;
+}

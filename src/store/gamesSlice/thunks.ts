@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { GameDetailed, GamesList } from '../stateSchema';
 import { ReduxState } from '../store';
+import { GameDetailed, GamesList } from '../stateSchema';
 import { getGameById, getGamesWithParams } from '../../utils/getGame';
 
 const GAME_LIFETIME = 5 * 60 * 1000;
