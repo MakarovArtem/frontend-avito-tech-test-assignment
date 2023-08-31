@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Game } from '../../store';
 import { convertDate } from '../../utils/convertDate';
-import { Card, Image, Typography, Space } from 'antd';
+import { Card, Image, Typography, Space, Spin } from 'antd';
 import style from './style.module.css';
 
 const { Title, Paragraph } = Typography;
@@ -24,7 +24,7 @@ export function GameCard({ data }: GameCardProps): JSX.Element {
     } = data;
 
     const handleClick = () => {
-        navigate(`/game/${id}`);
+        navigate(`/frontend-avito-tech-test-assignment/game/${id}`);
     };
 
     return (
@@ -38,6 +38,11 @@ export function GameCard({ data }: GameCardProps): JSX.Element {
                         preview={false}
                         src={thumbnail}
                         alt={title}
+                        placeholder={
+                            <div className={style.spinContainer}>
+                                <Spin />
+                            </div>
+                        }
                     />
                 </div>
                 <div className={style.info}>

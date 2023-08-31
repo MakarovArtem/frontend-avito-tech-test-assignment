@@ -1,6 +1,6 @@
 # For you
 
-Hello! I don't know who you are and how you've been doing lately. But I hope, that everything is okay, and I sure know that everything will be so. Thank you for checking my work. I have been trying to do well. Good luck you, me, and every student, who wants to became developer!
+Hello! I don't know who you are and how you've been doing lately. But I hope, that everything is okay, and I sure know that everything will be so. Thank you for checking my work. I have been trying to do well. Good luck you, me, and every student, who wants to become developer!
 
 # Installation
 
@@ -11,10 +11,8 @@ First clone the repository on your computer:
 git clone https://github.com/MakarovArtem/frontend-avito-tech-test-assignment
 ```
 
-When it is downloaded (sorry, cloned) you need to go to the app and install all the dependencies for the project:
+When it is cloned you need to go to the app and install all the dependencies for the project:
 ```
-cd myproject
-
 npm install
 ```
 
@@ -28,8 +26,6 @@ There are some other scripts, you can look them up in *package.json* file.
 By the way, if you use yarn, you run these commands:
 ```
 yarn dev
-
-yarn build
 ```
 
 # About the project
