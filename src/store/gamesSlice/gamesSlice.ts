@@ -73,6 +73,9 @@ export const gamesSlice = createSlice({
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
+        pushGame: (state, action: PayloadAction<GameDetailed>) => {
+            state.games.gamesDetailed.push(action.payload);
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -90,9 +93,9 @@ export const gamesSlice = createSlice({
             .addCase(fetchGameById.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(fetchGameById.fulfilled, (state, action: PayloadAction<GameDetailed>) => {
+            .addCase(fetchGameById.fulfilled, (state) => {
                 state.loading = false;
-                state.gamesDetailed.push(action.payload);
+                // state.gamesDetailed.push(action.payload);
             })
             .addCase(fetchGameById.rejected, (state, action) => {
                 state.loading = false;
