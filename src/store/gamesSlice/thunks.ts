@@ -1,37 +1,32 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GameDetailed, GamesList } from '../stateSchema';
 import { ReduxState } from '../store';
+import { getGameById, getGamesWithParams } from '../../utils/getGame';
 
-const URL = 'https://free-to-play-games-database.p.rapidapi.com/api/'; // using rapidapi because of CORS
-const KEY = 'bf1f96f513mshc19fca591eba50dp18bba8jsn59b35f4f9014'; // if doesn't work - put your key here (need to sign up for the site 'rapidapicom)
-const HOST = 'free-to-play-games-database.p.rapidapi.com';
+const GAME_LIFETIME = 5 * 60 * 1000;
 
-export const fetchGames = createAsyncThunk<GamesList, string, { state: ReduxState }>(
+export const fetchGames = createAsyncThunk<GamesList, null, { state: ReduxState }>(
     'games/fetchGames',
     async function (_, thunkAPI) {
         const params = thunkAPI.getState().games.params;
         const queryString = Object.entries(params).map( param => param.join('=')).join('&');
-        const response = await fetch(URL + 'games?' + queryString, {
-            headers: {
-                'X-RapidAPI-Key': KEY,
-                'X-RapidAPI-Host': HOST
-            }
-        });
-        const data = await response.json() as GamesList;
-        return data;
+        const games = await getGamesWithParams(queryString);
+        return games;
     }
 );
 
-export const fetchGameById = createAsyncThunk<GameDetailed, string, { state: ReduxState }>(
+export const fetchGameById = createAsyncThunk<GameDetailed, number, { state: ReduxState }>(
     'games/fetchGameById',
-    async function (id: string) {
-        const response = await fetch(URL + 'game?id=' + id, {
-            headers: {
-                'X-RapidAPI-Key': KEY,
-                'X-RapidAPI-Host': HOST
+    async function (id, { getState }) {
+        const state = getState();
+        const currentGame = state.games.gamesDetailed.find( game => game.id == id);
+        if (currentGame) {
+            const isLifetimeExpired = Date.now() - currentGame.requestTime > GAME_LIFETIME ? true : false;
+            if (!isLifetimeExpired) {
+                return currentGame;
             }
-        });
-        const data = await response.json() as GameDetailed;
-        return data;
+        }
+        const updatedGame = await getGameById(id);
+        return { ...updatedGame, requestTime: Date.now() };
     }
 );

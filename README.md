@@ -1,27 +1,8 @@
-# React + TypeScript + Vite
+## Comments
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+If I leave lots of comments - don't worry. I think my code is quite easy to read BUT if it's not, it'd be nice of me to explain some constructions, coz I think you are gonna need a lot of time to check apps of all students.
 
-Currently, two official plugins are available:
+## Errors
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Browser games do not have minimal system requirements, like this one: https://www.freetogame.com/api/game?id=432
+You could make sure if go to that link, copy JSON and then go to the site and look at it in pretty formatting: https://jsonformatter.org/json-pretty-print
