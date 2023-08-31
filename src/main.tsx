@@ -9,8 +9,8 @@ import { Spinner } from './components';
 import './index.css';
 
 export enum Routes {
-    MAIN = '/',
-    GAME = '/game/:id',
+    MAIN = '/frontend-avito-tech-test-assignment',
+    GAME = '/frontend-avito-tech-test-assignment/game/:id',
 }
 
 const router = createBrowserRouter([
