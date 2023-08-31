@@ -1,7 +1,7 @@
 import { Spin } from 'antd';
 import style from './style.module.css';
 
-function Spinner() {
+export function Spinner() {
 
     return (
         <div className={style.wrapper}>
@@ -11,5 +11,3 @@ function Spinner() {
         </div>
     );
 }
-
-export default Spinner;

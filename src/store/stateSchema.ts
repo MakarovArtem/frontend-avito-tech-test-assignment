@@ -27,7 +27,6 @@ export interface SystemRequirements {
     storage: string;
 }
 
-
 export interface GameDetailed {
     id: number;
     title: string;
@@ -45,3 +44,4 @@ export interface GameDetailed {
     minimum_system_requirements: SystemRequirements;
     screenshots: Screenshot[];
 }
+

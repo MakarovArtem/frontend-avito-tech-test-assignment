@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Card, Image, Typography, Space } from 'antd';
+import { Game } from '../../store';
+import { convertDate } from '../../utils/convertDate';
 import style from './style.module.css';
-import { Game } from '../../redux/stateSchema';
 
 const { Title, Paragraph } = Typography;
 
@@ -9,7 +10,9 @@ interface GameCardProps {
     data: Game
 }
 
-function GameCard({ data }: GameCardProps): JSX.Element {
+export function GameCard({ data }: GameCardProps): JSX.Element {
+
+    const navigate = useNavigate();
 
     const {
         thumbnail,
@@ -20,14 +23,19 @@ function GameCard({ data }: GameCardProps): JSX.Element {
         id,
     } = data;
 
+    const handleClick = () => {
+        navigate(`/game/${id}`);
+    };
+
     return (
-        <Card extra={<Link to={`/game/${id}`}>{title}</Link>}>
+        <Card className={style.card} onClick={handleClick}>
             <div className={style.container}>
                 <div className={style.title}>
                     <Title>{title}</Title>
                 </div>
                 <div className={style.img}>
                     <Image
+                        preview={false}
                         width={365}
                         src={thumbnail}
                         alt={title}
@@ -35,7 +43,7 @@ function GameCard({ data }: GameCardProps): JSX.Element {
                 </div>
                 <div className={style.info}>
                     <Space direction='vertical'>
-                        <Paragraph>Release date: {release_date}</Paragraph>
+                        <Paragraph>Release date: {convertDate(release_date)}</Paragraph>
                         <Paragraph>Publisher: {publisher}</Paragraph>
                         <Paragraph>Genre: {genre}</Paragraph>
                     </Space>
@@ -44,5 +52,3 @@ function GameCard({ data }: GameCardProps): JSX.Element {
         </Card>
     );
 }
-
-export default GameCard;

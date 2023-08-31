@@ -1,40 +1,59 @@
 import { useParams } from 'react-router-dom';
-import { Suspense, lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from '../../redux/store';
-import { fetchGameById } from '../../redux/gamesSlice/thunks';
-import { Col, Row } from 'antd';
-import BackButton from '../../components/BackButton';
-import Spinner from '../../components/Spinner';
+import { Suspense, useCallback, useEffect } from 'react';
+import { useDispatch, useSelector, fetchGameById, gamesActions } from '../../store';
+import { Col, Divider, Row, Typography } from 'antd';
+import { Spinner, GameInfo } from '../../components/';
 
-const GameInfoLazy = lazy(() => import('../../components/GameInfo'));
+const { Title } = Typography;
 
 function GamePage() {
 
     const { id } = useParams<{ id: string }>();
     const game = useSelector(state => state.games.game);
+    const loading = useSelector(state => state.games.loading);
     const dispatch = useDispatch();
 
+    // const getGame = useCallback((id: string): void => {
+    //     dispatch(gamesActions.setLoading(true));
+    //     const timeNow = Date.now();
+    //     const TIME_BEFORE_REQUEST = 5 * 60 * 1000;
+    //     const dataStringified = sessionStorage.getItem(id);
+    //     if(dataStringified !== null) {
+    //         const { requestTime } = JSON.parse(dataStringified);
+    //         const timeDifference = timeNow - requestTime;
+    //         if(timeDifference > TIME_BEFORE_REQUEST) {
+    //             dispatch(fetchGameById(id));
+    //         } else {
+    //             dispatch(gamesActions.extractGameFromSessionStorage(id));
+    //         }
+    //     } else {
+    //         dispatch(fetchGameById(id));
+    //     }
+    // }, [dispatch]);
+
     useEffect(() => {
-        dispatch(fetchGameById(id))
-            .then(() => console.log('games fetched'))
-            .catch(() => console.log('error happened'));
+        // console.log('loading: ', loading )
+        dispatch(fetchGameById(id));
     }, [id, dispatch]);
 
     return (
-        <>
+        <div style={{ padding: '18px' }}>
             <Row justify={'center'}>
-                <Col xs={12} sm={12} xl={12}>
-                    <Suspense fallback={<Spinner />}>
-                        <GameInfoLazy game={game} />
-                    </Suspense>
+                <Col>
+                    <Title level={1}>
+                        Game Page
+                    </Title>
                 </Col>
             </Row>
-            <Row justify={'center'}>
-                <Col xs={12} sm={12} xl={12}>
-                    <BackButton />
-                </Col>
-            </Row>
-        </>
+            <Divider />
+            <Suspense fallback={<Spinner />}>
+                <Row justify={'center'}>
+                    <Col xs={12} sm={12} xl={12}>
+                        {loading ? <Spinner /> : <GameInfo game={game} />}
+                    </Col>
+                </Row>
+            </Suspense>
+        </div>
     );
 }
 

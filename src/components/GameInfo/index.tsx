@@ -1,14 +1,16 @@
 import { Row, Col, Typography, Descriptions, Carousel, Image } from 'antd';
-import { GameDetailed } from '../../redux/stateSchema';
+import { GameDetailed } from '../../store';
+import { BackButton } from '../index';
+import { convertDate } from '../../utils/convertDate';
 const { Title } = Typography;
 
 interface GameInfoProps {
     game: GameDetailed,
 }
 
-function GameInfo({game}: GameInfoProps) {
+export function GameInfo({ game }: GameInfoProps): JSX.Element {
 
-    const info = [
+    const additionalInfo = [
         {
             key: 1,
             label: 'Title',
@@ -27,7 +29,7 @@ function GameInfo({game}: GameInfoProps) {
         {
             key: 4,
             label: 'Release date',
-            children: game?.release_date,
+            children: convertDate(game?.release_date),
         },
         {
             key: 5,
@@ -43,7 +45,7 @@ function GameInfo({game}: GameInfoProps) {
 
     const req = game?.minimum_system_requirements;
 
-    const system = [
+    const systemRequirements = [
         {
             key: 1,
             label: 'OS',
@@ -72,46 +74,58 @@ function GameInfo({game}: GameInfoProps) {
     ];
 
     return (
-        <>
+        <div>
             <Row justify={'center'}>
                 <Col>
-                    <Title>{game?.title}</Title>
+                    <Title level={2}>{game?.title}</Title>
                 </Col>
             </Row>
             <Row justify={'center'}>
-                <Col xl={12}>
+                <Col>
                     <Descriptions
                         column={{ xs:2, sm: 2, xl:3, xxl:3 }}
                         title="Additional information"
-                        items={info}
+                        items={additionalInfo}
                     />
                 </Col>
             </Row>
             <Row justify={'center'}>
-                <Col xl={12}>
-                    <Carousel autoplay>
-                        {game?.screenshots?.map( screenshot =>
+                <Col>
+                    <Title level={5}>Screenshots galery</Title>
+                    <Carousel dotPosition={'left'}>
+                        {game?.screenshots.map( screenshot =>
                             <Image
+                                style={{ height: '100%' }}
                                 key={screenshot.id}
                                 alt={game?.title}
                                 src={screenshot.image}
+                                placeholder={
+                                    <div style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        backgroundColor: 'white'
+                                    }}></div>
+                                }
                             />
                         )}
                     </Carousel>
                 </Col>
             </Row>
             <Row justify={'center'}>
-                <Col xl={12}>
+                <Col>
                     <Descriptions
                         column={{ xs:1, sm: 2, xl:2, xxl:2 }}
                         layout={'vertical'}
-                        title="Minimum System Requirements"
-                        items={system}
+                        title="Minimum system requirements"
+                        items={systemRequirements}
                     />
                 </Col>
             </Row>
-        </>
+            <Row justify={'start'}>
+                <Col>
+                    <BackButton />
+                </Col>
+            </Row>
+        </div>
     );
 }
-
-export default GameInfo;
