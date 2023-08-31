@@ -22,11 +22,6 @@ export const fetchGames = createAsyncThunk<GamesList, string, { state: ReduxStat
     }
 );
 
-export interface SessionState {
-    requestTime: number,
-    data: GameDetailed
-}
-
 export const fetchGameById = createAsyncThunk<GameDetailed, string, { state: ReduxState }>(
     'games/fetchGameById',
     async function (id: string) {
@@ -37,12 +32,6 @@ export const fetchGameById = createAsyncThunk<GameDetailed, string, { state: Red
             }
         });
         const data = await response.json() as GameDetailed;
-        // const timeStamp = Date.now();
-        // const sessionState: SessionState = {
-        //     requestTime: timeStamp,
-        //     data: data
-        // };
-        // sessionStorage.setItem(id, JSON.stringify(sessionState));
         return data;
     }
 );

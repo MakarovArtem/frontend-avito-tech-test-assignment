@@ -45,3 +45,8 @@ export interface GameDetailed {
     screenshots: Screenshot[];
 }
 
+
+export interface SessionState {
+    requestTime: number,
+    data: GameDetailed
+}

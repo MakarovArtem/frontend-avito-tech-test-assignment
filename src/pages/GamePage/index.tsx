@@ -5,6 +5,7 @@ import { Col, Divider, Row, Typography } from 'antd';
 import { Spinner, GameInfo } from '../../components/';
 
 const { Title } = Typography;
+const TIME_BEFORE_REFRESHING = 5 * 60 * 1000;
 
 function GamePage() {
 
@@ -13,28 +14,30 @@ function GamePage() {
     const loading = useSelector(state => state.games.loading);
     const dispatch = useDispatch();
 
-    // const getGame = useCallback((id: string): void => {
-    //     dispatch(gamesActions.setLoading(true));
-    //     const timeNow = Date.now();
-    //     const TIME_BEFORE_REQUEST = 5 * 60 * 1000;
-    //     const dataStringified = sessionStorage.getItem(id);
-    //     if(dataStringified !== null) {
-    //         const { requestTime } = JSON.parse(dataStringified);
-    //         const timeDifference = timeNow - requestTime;
-    //         if(timeDifference > TIME_BEFORE_REQUEST) {
-    //             dispatch(fetchGameById(id));
-    //         } else {
-    //             dispatch(gamesActions.extractGameFromSessionStorage(id));
-    //         }
-    //     } else {
-    //         dispatch(fetchGameById(id));
-    //     }
-    // }, [dispatch]);
+    const refreshGame = useCallback((id: string) => {
+        dispatch(fetchGameById(id));
+        dispatch(gamesActions.addGameToSessionStorage(id));
+    }, [dispatch]);
+
+    const getGame = useCallback((id: string, lifetime: number): void => {
+        const currentTime = Date.now();
+        const data = sessionStorage.getItem(id);
+        if(data === null) {
+            refreshGame(id);
+        } else {
+            const { requestTime } = data;
+            const timeInterval = currentTime - +requestTime;
+            if(timeInterval > lifetime) {
+                refreshGame(id);
+            } else {
+                dispatch(gamesActions.extractGameFromSessionStorage(id));
+            }
+        }
+    }, [refreshGame, dispatch]);
 
     useEffect(() => {
-        // console.log('loading: ', loading )
-        dispatch(fetchGameById(id));
-    }, [id, dispatch]);
+        getGame(id, TIME_BEFORE_REFRESHING);
+    }, [id, dispatch, getGame]);
 
     return (
         <div style={{ padding: '18px' }}>
@@ -46,13 +49,14 @@ function GamePage() {
                 </Col>
             </Row>
             <Divider />
-            <Suspense fallback={<Spinner />}>
+            {/* <Suspense fallback={<Spinner />}> */}
                 <Row justify={'center'}>
                     <Col xs={12} sm={12} xl={12}>
+                        {/* <GameInfo game={game} /> */}
                         {loading ? <Spinner /> : <GameInfo game={game} />}
                     </Col>
                 </Row>
-            </Suspense>
+            {/* </Suspense> */}
         </div>
     );
 }

@@ -92,17 +92,20 @@ export function GameInfo({ game }: GameInfoProps): JSX.Element {
             <Row justify={'center'}>
                 <Col>
                     <Title level={5}>Screenshots galery</Title>
-                    <Carousel dotPosition={'left'}>
+                    <Carousel 
+                        style={{ height: '100%' }}
+                        dotPosition={'left'}
+                    >
+                        
                         {game?.screenshots.map( screenshot =>
                             <Image
-                                style={{ height: '100%' }}
                                 key={screenshot.id}
                                 alt={game?.title}
                                 src={screenshot.image}
                                 placeholder={
                                     <div style={{
                                         width: '100%',
-                                        height: '100%',
+                                        height: '560',
                                         backgroundColor: 'white'
                                     }}></div>
                                 }
