@@ -13,7 +13,7 @@ function MainPage() {
     const loading = useSelector(state => state.games.loading);
 
     useEffect(() => {
-        dispatch(fetchGames(''));
+        dispatch(fetchGames(null));
     }, [params, dispatch]);
 
     const platrofrmOptions = [

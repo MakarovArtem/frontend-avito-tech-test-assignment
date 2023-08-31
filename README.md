@@ -1,4 +1,6 @@
+## Comments
 
+If I leave lots of comments - don't worry. I think my code is quite easy to read BUT if it's not, it'd be nice of me to explain some constructions, coz I think you are gonna need a lot of time to check apps of all students.
 
 ## Errors
 

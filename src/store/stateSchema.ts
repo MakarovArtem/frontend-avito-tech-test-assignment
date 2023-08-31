@@ -28,6 +28,7 @@ export interface SystemRequirements {
 }
 
 export interface GameDetailed {
+    requestTime: number;
     id: number;
     title: string;
     thumbnail: string;
@@ -45,6 +46,7 @@ export interface GameDetailed {
     screenshots: Screenshot[];
 }
 
+export type GamesDetailed = GameDetailed[];
 
 export interface SessionState {
     requestTime: number,

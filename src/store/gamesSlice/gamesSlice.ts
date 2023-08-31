@@ -1,57 +1,60 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { GameDetailed, GamesList, SessionState } from '../stateSchema';
+import { GameDetailed, GamesDetailed, GamesList } from '../stateSchema';
 import { fetchGames, fetchGameById } from './thunks';
 
 export type Param = Record<string, string>
 
 export interface GamesState {
     games: GamesList;
-    game: GameDetailed;
+    gamesDetailed: GamesDetailed;
     params: Param;
     loading: boolean;
     error: string | undefined;
 }
 
+// const gameDetailedInitial = {
+//     requestTime: Date.now(),
+//     id: 0,
+//     title: '',
+//     thumbnail: '',
+//     status: '',
+//     short_description: '',
+//     description: '',
+//     game_url: '',
+//     genre: '',
+//     platform: '',
+//     publisher: '',
+//     developer: '',
+//     release_date: '',
+//     freetogame_profile_url: '',
+//     minimum_system_requirements: {
+//         os: '',
+//         processor: '',
+//         memory: '',
+//         graphics: '',
+//         storage: ''
+//     },
+//     screenshots: [
+//         {
+//             id: 0,
+//             image: ''
+//         },
+//         {
+//             id: 0,
+//             image: ''
+//         },
+//         {
+//             id: 0,
+//             image: ''
+//         }
+//     ]
+// };
+
 const initialState: GamesState = {
     games: [],
-    game: {
-        id: 0,
-        title: '',
-        thumbnail: '',
-        status: '',
-        short_description: '',
-        description: '',
-        game_url: '',
-        genre: '',
-        platform: '',
-        publisher: '',
-        developer: '',
-        release_date: '',
-        freetogame_profile_url: '',
-        minimum_system_requirements: {
-            os: '',
-            processor: '',
-            memory: '',
-            graphics: '',
-            storage: ''
-        },
-        screenshots: [
-            {
-                id: 0,
-                image: ''
-            },
-            {
-                id: 0,
-                image: ''
-            },
-            {
-                id: 0,
-                image: ''
-            }
-        ]
-    },
+    gamesDetailed: [],
     params: {},
-    loading: false,
+    loading: true,
     error: '',
 };
 
@@ -69,20 +72,6 @@ export const gamesSlice = createSlice({
         },
         setLoading: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
-        },
-        addGameToSessionStorage: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
-            const game = state.game;
-            const currentTime = Date.now();
-            const sessionState: SessionState = {
-                requestTime: currentTime,
-                data: game
-            };
-            sessionStorage.setItem(id, JSON.stringify(sessionState));
-        },
-        extractGameFromSessionStorage: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
-            state.game = JSON.parse(sessionStorage.getItem(id));
         },
     },
     extraReducers: (builder) => {
@@ -103,7 +92,7 @@ export const gamesSlice = createSlice({
             })
             .addCase(fetchGameById.fulfilled, (state, action: PayloadAction<GameDetailed>) => {
                 state.loading = false;
-                state.game = action.payload;
+                state.gamesDetailed.push(action.payload);
             })
             .addCase(fetchGameById.rejected, (state, action) => {
                 state.loading = false;
