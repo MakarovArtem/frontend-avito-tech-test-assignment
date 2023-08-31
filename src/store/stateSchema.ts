@@ -27,7 +27,6 @@ export interface SystemRequirements {
     storage: string;
 }
 
-
 export interface GameDetailed {
     id: number;
     title: string;
@@ -44,4 +43,10 @@ export interface GameDetailed {
     freetogame_profile_url: string;
     minimum_system_requirements: SystemRequirements;
     screenshots: Screenshot[];
+}
+
+
+export interface SessionState {
+    requestTime: number,
+    data: GameDetailed
 }

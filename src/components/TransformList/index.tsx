@@ -1,6 +1,5 @@
 import { Select as SelectAntd, Typography } from 'antd';
-import { useDispatch } from '../../redux/store';
-import { gamesActions } from '../../redux/gamesSlice/gamesSlice';
+import { useDispatch, gamesActions } from '../../store';
 
 const { Paragraph } = Typography;
 
@@ -20,7 +19,7 @@ interface TransformListPorps {
     defaultOption?: string,
 }
 
-function TransformList(props: TransformListPorps): JSX.Element {
+export function TransformList(props: TransformListPorps): JSX.Element {
 
     const dispatch = useDispatch();
 
@@ -28,7 +27,6 @@ function TransformList(props: TransformListPorps): JSX.Element {
         type,
         options,
         filterBy,
-        id,
         defaultOption = 'notChosen',
     } = props;
 
@@ -54,5 +52,3 @@ function TransformList(props: TransformListPorps): JSX.Element {
         </>
     );
 }
-
-export default TransformList;

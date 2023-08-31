@@ -1,25 +1,19 @@
 import { Typography, Divider, Space, Row, Col } from 'antd';
-import Link from 'antd/es/typography/Link';
-import { Suspense, lazy, useEffect } from 'react';
-import Spinner from '../../components/Spinner';
-import { useDispatch, useSelector } from '../../redux/store';
-import { fetchGames } from '../../redux/gamesSlice/thunks';
-import TransformList from '../../components/Select';
+import { useEffect } from 'react';
+import { GamesList, Spinner, TransformList } from '../../components';
+import { useDispatch, useSelector, fetchGames, getGames, getParams, getLoading } from '../../store';
 
 const { Title } = Typography;
-
-const GamesListLazy = lazy(() => import('../../components/GamesList'));
 
 function MainPage() {
 
     const dispatch = useDispatch();
     const games = useSelector(state => state.games.games);
     const params = useSelector(state => state.games.params);
+    const loading = useSelector(state => state.games.loading);
 
     useEffect(() => {
-        dispatch(fetchGames(''))
-            .then(() => console.log('games fetched'))
-            .catch(() => console.log('error happened'));
+        dispatch(fetchGames(''));
     }, [params, dispatch]);
 
     const platrofrmOptions = [
@@ -39,7 +33,7 @@ function MainPage() {
         { value: 'social', label: 'social' },
     ];
 
-    const sortyOptions = [
+    const sortOptions = [
         { value: 'notChosen', label: 'not chosen' },
         { value: 'release-date', label: 'Release date' },
         { value: 'popularity', label: 'Popularity' },
@@ -48,15 +42,12 @@ function MainPage() {
     ];
 
     return (
-        <div>
+        <div style={{ padding: '18px' }}>
             <Row justify={'center'}>
                 <Col>
-                    <Title level={2}>
-                        MainPage
+                    <Title level={1}>
+                        Main Page
                     </Title>
-                    <Link href="https://t.me/EineApfelsine" target="_blank">
-                        Telegram
-                    </Link>
                 </Col>
             </Row>
             <Divider />
@@ -75,14 +66,12 @@ function MainPage() {
                     />
                     <TransformList
                         type='sort'
-                        options={sortyOptions}
+                        options={sortOptions}
                     />
                 </Space>
             </Row>
             <Divider>Games List Below</Divider>
-            <Suspense fallback={<Spinner />}>
-                <GamesListLazy games={games}/>
-            </Suspense>
+            {loading ? <Spinner /> : <GamesList games={games}/>}
         </div>
     );
 }

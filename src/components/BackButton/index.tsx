@@ -3,7 +3,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../main';
 
-function BackButton() {
+export function BackButton() {
 
     const navigate = useNavigate();
 
@@ -22,5 +22,3 @@ function BackButton() {
         </Button>
     );
 }
-
-export default BackButton;

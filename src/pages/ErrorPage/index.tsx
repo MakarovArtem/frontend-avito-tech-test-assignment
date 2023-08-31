@@ -1,12 +1,11 @@
 import { Typography, Card, Row, Col } from 'antd';
-import BackButton from '../../components/BackButton';
+import { BackButton } from '../../components';
 import { useRouteError } from 'react-router-dom';
 const { Paragraph } = Typography;
 
 const ErrorPage = () => {
 
     const error = useRouteError();
-    console.error(error);
 
     return (
         <Row
