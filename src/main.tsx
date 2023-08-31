@@ -6,7 +6,9 @@ import './index.css';
 import GamePage from './pages/GamePage';
 import ErrorPage from './pages/ErrorPage';
 import { Provider as StoreProvider } from 'react-redux';
-import { reduxStore } from './store';
+import { reduxStore, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Spinner } from './components';
 
 export enum Routes {
     MAIN = '/',
@@ -29,7 +31,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <StoreProvider store={reduxStore}>
-            <RouterProvider router={router} />
+            <PersistGate loading={<Spinner />} persistor={persistor}>
+                <RouterProvider router={router} />
+            </PersistGate>
         </StoreProvider>
     </React.StrictMode>,
 );

@@ -34,7 +34,7 @@ module.exports = {
     'block-spacing': 'warn',
     'linebreak-style': ['warn', 'windows'],
     'no-trailing-spaces': 'error',
-    'object-curly-newline': ['error', {
+    'object-curly-newline': ['warn', {
         'ObjectExpression': { 'multiline': true },
         'ObjectPattern': { 'multiline': true },
         'ImportDeclaration': 'never',

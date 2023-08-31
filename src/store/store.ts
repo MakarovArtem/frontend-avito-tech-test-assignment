@@ -3,8 +3,34 @@ import { useSelector as useReduxSelector,
     useDispatch as useReduxDispatch,
     type TypedUseSelectorHook, } from 'react-redux';
 import { gamesReducer } from './gamesSlice/gamesSlice';
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-export const reduxStore = configureStore({ reducer: { games: gamesReducer, } });
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, gamesReducer);
+
+export const reduxStore = configureStore({
+    reducer: { games: persistedReducer },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
+});
+export const persistor = persistStore(reduxStore);
 
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;
