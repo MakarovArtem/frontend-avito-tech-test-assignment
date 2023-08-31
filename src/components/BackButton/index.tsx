@@ -1,7 +1,7 @@
-import { Button } from 'antd';
-import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { Routes } from '../../main';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 export function BackButton() {
 

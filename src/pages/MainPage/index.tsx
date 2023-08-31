@@ -1,20 +1,17 @@
-import { Typography, Divider, Space, Row, Col } from 'antd';
 import { useEffect } from 'react';
-import { GamesList, Spinner, TransformList } from '../../components';
 import { useDispatch, useSelector, fetchGames } from '../../store';
+import { GamesList, Spinner, TransformList } from '../../components';
+import { Typography, Divider, Row, Col } from 'antd';
+import style from './style.module.css';
 
 const { Title } = Typography;
 
-function MainPage() {
+export function MainPage() {
 
     const dispatch = useDispatch();
     const games = useSelector(state => state.games.games);
     const params = useSelector(state => state.games.params);
     const loading = useSelector(state => state.games.loading);
-
-    useEffect(() => {
-        dispatch(fetchGames(null));
-    }, [params, dispatch]);
 
     const platrofrmOptions = [
         { value: 'notChosen', label: 'not chosen' },
@@ -41,6 +38,10 @@ function MainPage() {
         { value: 'relevance', label: 'Relevance' },
     ];
 
+    useEffect(() => {
+        dispatch(fetchGames(null));
+    }, [params, dispatch]);
+
     return (
         <div style={{ padding: '18px' }}>
             <Row justify={'center'}>
@@ -52,27 +53,31 @@ function MainPage() {
             </Row>
             <Divider />
             <Row justify={'center'}>
-                <Space align='center'>
-                    <TransformList
-                        type={'filter'}
-                        filterBy={'platform'}
-                        options={platrofrmOptions}
-                    />
-                    <TransformList
-                        type={'filter'}
-                        filterBy={'category'}
-                        options={categoryOptions}
-                    />
-                    <TransformList
-                        type='sort'
-                        options={sortOptions}
-                    />
-                </Space>
+                <div className={style.container}>
+                    <div className={style.platform}>
+                        <TransformList
+                            type={'filter'}
+                            filterBy={'platform'}
+                            options={platrofrmOptions}
+                        />
+                    </div>
+                    <div className={style.filter}>
+                        <TransformList
+                            type={'filter'}
+                            filterBy={'category'}
+                            options={categoryOptions}
+                        />
+                    </div>
+                    <div className={style.sort}>
+                        <TransformList
+                            type='sort'
+                            options={sortOptions}
+                        />
+                    </div>
+                </div>
             </Row>
             <Divider>Games List Below</Divider>
-            {loading ? <Spinner /> : <GamesList games={games}/>}
+            { loading ? <Spinner /> : <GamesList games={games}/> }
         </div>
     );
 }
-
-export default MainPage;

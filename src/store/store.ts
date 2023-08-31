@@ -3,8 +3,7 @@ import { useSelector as useReduxSelector,
     useDispatch as useReduxDispatch,
     type TypedUseSelectorHook, } from 'react-redux';
 import { gamesReducer } from './gamesSlice/gamesSlice';
-import {
-    persistStore,
+import { persistStore,
     persistReducer,
     FLUSH,
     REHYDRATE,
@@ -24,11 +23,7 @@ const persistedReducer = persistReducer(persistConfig, gamesReducer);
 export const reduxStore = configureStore({
     reducer: { games: persistedReducer },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }),
+        getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }),
 });
 export const persistor = persistStore(reduxStore);
 

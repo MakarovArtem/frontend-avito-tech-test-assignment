@@ -1,13 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector, fetchGameById } from '../../store';
-import { Col, Divider, Row, Typography } from 'antd';
 import { Spinner, GameInfo } from '../../components/';
+import { Col, Divider, Row, Typography } from 'antd';
 
 const { Title } = Typography;
 
-
-function GamePage() {
+export function GamePage() {
 
     const { id } = useParams<{ id: string }>();
     const game = useSelector( state =>
@@ -31,12 +30,10 @@ function GamePage() {
             </Row>
             <Divider />
             <Row justify={'center'}>
-                <Col xs={12} sm={12} xl={12}>
-                    {loading ? <Spinner /> : <GameInfo game={game} />}
+                <Col xs={24} sm={18} xl={12}>
+                    { loading ? <Spinner /> : <GameInfo game={game} /> }
                 </Col>
             </Row>
         </div>
     );
 }
-
-export default GamePage;

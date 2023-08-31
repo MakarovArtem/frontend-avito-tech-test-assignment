@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    column-gap: 32px;
+    grid-template-areas: 
+        'platfrom category sort';
+}
+
+.platfrom{
+    grid-area: platfrom;
+}
+
+.category{
+    grid-area: category;
+}
+
+.sort{
+    grid-area: sort;
+}
+
+@media screen and (width <= 768px){
+    .container{
+        row-gap: 16px;
+        grid-template-areas: 
+            'platfrom'
+            'category'
+            'sort';
+        grid-template-columns: 365px;
+    }
+}

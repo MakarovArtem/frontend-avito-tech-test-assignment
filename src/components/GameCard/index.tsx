@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { Card, Image, Typography, Space } from 'antd';
 import { Game } from '../../store';
 import { convertDate } from '../../utils/convertDate';
+import { Card, Image, Typography, Space } from 'antd';
 import style from './style.module.css';
 
 const { Title, Paragraph } = Typography;
@@ -36,7 +36,6 @@ export function GameCard({ data }: GameCardProps): JSX.Element {
                 <div className={style.img}>
                     <Image
                         preview={false}
-                        width={365}
                         src={thumbnail}
                         alt={title}
                     />

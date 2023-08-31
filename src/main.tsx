@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import './index.css';
-import GamePage from './pages/GamePage';
-import ErrorPage from './pages/ErrorPage';
 import { Provider as StoreProvider } from 'react-redux';
-import { reduxStore, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { reduxStore, persistor } from './store';
+import { MainPage, GamePage, ErrorPage } from './pages';
 import { Spinner } from './components';
+import './index.css';
 
 export enum Routes {
     MAIN = '/',
