@@ -1,4 +1,4 @@
-export const convertDate = (oldFormat: string): string => {
+export const convertDate = (oldFormat: string | undefined): string => {
     if(oldFormat === undefined) {
         return '';
     } else {
