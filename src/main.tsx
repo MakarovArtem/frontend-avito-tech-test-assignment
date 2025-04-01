@@ -9,7 +9,7 @@ import { Spinner } from './components';
 import './index.css';
 
 export enum Routes {
-    MAIN = '/frontend-avito-tech-test-assignment',
+    MAIN = '/frontend-avito-tech-test-assignment/',
     GAME = '/frontend-avito-tech-test-assignment/game/:id',
     ERROR = '/frontend-avito-tech-test-assignment/error',
 }
