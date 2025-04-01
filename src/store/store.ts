@@ -3,12 +3,16 @@ import { useSelector as useReduxSelector,
     useDispatch as useReduxDispatch,
     type TypedUseSelectorHook, } from 'react-redux';
 import { gamesReducer } from './gamesSlice/gamesSlice';
-import { paramsWatcher } from './middlewares/paramsWatcher';
+import { createParamsWatcher } from './middlewares/paramsWatcher';
+import { useNavigate } from 'react-router-dom';
+
+const navigate = useNavigate();
+const paramsMiddleware = createParamsWatcher(navigate);
 
 export const reduxStore = configureStore({
     reducer: { games: gamesReducer },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(paramsWatcher),
+        getDefaultMiddleware().concat(paramsMiddleware),
 });
 
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
