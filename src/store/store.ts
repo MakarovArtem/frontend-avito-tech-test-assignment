@@ -2,7 +2,6 @@ import { configureStore, type ThunkAction, type Action } from '@reduxjs/toolkit'
 import { useSelector as useReduxSelector,
     useDispatch as useReduxDispatch,
     type TypedUseSelectorHook, } from 'react-redux';
-import { gamesReducer } from './gamesSlice/gamesSlice';
 import { persistStore,
     persistReducer,
     FLUSH,
@@ -12,6 +11,8 @@ import { persistStore,
     PURGE,
     REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
+import { gamesReducer } from './gamesSlice/gamesSlice';
+import { paramsWatcher } from './middlewares/paramsWatcher';
 
 const persistConfig = {
     key: 'root',
@@ -23,7 +24,7 @@ const persistedReducer = persistReducer(persistConfig, gamesReducer);
 export const reduxStore = configureStore({
     reducer: { games: persistedReducer },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }),
+        getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }).concat(paramsWatcher),
 });
 export const persistor = persistStore(reduxStore);
 

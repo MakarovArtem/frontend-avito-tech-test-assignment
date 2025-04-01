@@ -11,6 +11,7 @@ import './index.css';
 export enum Routes {
     MAIN = '/frontend-avito-tech-test-assignment',
     GAME = '/frontend-avito-tech-test-assignment/game/:id',
+    ERROR = '/frontend-avito-tech-test-assignment/error',
 }
 
 const router = createBrowserRouter([
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
     {
         path: Routes.GAME,
         element: <GamePage />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: Routes.ERROR,
+        element: <ErrorPage />,
         errorElement: <ErrorPage />,
     },
 ]);
