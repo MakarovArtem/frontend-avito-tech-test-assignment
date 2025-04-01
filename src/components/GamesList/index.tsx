@@ -9,6 +9,7 @@ interface GamesListProps {
 
 export function GamesList({ games }: GamesListProps): JSX.Element {
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentPageSize, setCurrentPageSize] = useState(10);
     const totalItems = games.length;
 
     const handleChange = (page: number, newPageSize: number) => {
@@ -21,13 +22,24 @@ export function GamesList({ games }: GamesListProps): JSX.Element {
         setCurrentPage(page);
     };
 
+    const handlePageSizeChange = (current: number, size: number) => {
+        if (size === 50) {
+          return;
+        }
+
+        setCurrentPageSize(size);
+        setCurrentPage(1);
+      };
+
     return (
         <List
             pagination={{
                 current: currentPage,
+                pageSize: currentPageSize,
                 position:'both',
                 align: 'center',
                 onChange: handleChange,
+                onShowSizeChange: handlePageSizeChange
             }}
             dataSource={ games }
             renderItem={ game => (
