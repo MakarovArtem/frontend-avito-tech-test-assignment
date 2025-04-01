@@ -3,29 +3,17 @@ import { useSelector as useReduxSelector,
     useDispatch as useReduxDispatch,
     type TypedUseSelectorHook, } from 'react-redux';
 import { gamesReducer } from './gamesSlice/gamesSlice';
-import { persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER } from 'redux-persist';
-import storage from 'redux-persist/lib/storage/session';
+import { createParamsWatcher } from './middlewares/paramsWatcher';
+import { useNavigate } from 'react-router-dom';
 
-const persistConfig = {
-    key: 'root',
-    storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, gamesReducer);
+const navigate = useNavigate();
+const paramsMiddleware = createParamsWatcher(navigate);
 
 export const reduxStore = configureStore({
-    reducer: { games: persistedReducer },
+    reducer: { games: gamesReducer },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({ serializableCheck: { ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], }, }),
+        getDefaultMiddleware().concat(paramsMiddleware),
 });
-export const persistor = persistStore(reduxStore);
 
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;

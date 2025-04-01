@@ -33,7 +33,7 @@ export function TransformList(props: TransformListPorps): JSX.Element {
     const title = type === 'filter' ? `Filter by ${filterBy}` : 'Sort by';
 
     const handleChange = (value: string) => {
-        const key = filterBy ? filterBy : 'sort-by';
+        const key = filterBy ? filterBy : 'sortBy';
         if (value === 'notChosen') {
             dispatch(gamesActions.removeQueryParam(key));
         }

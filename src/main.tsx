@@ -2,15 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { reduxStore, persistor } from './store';
+import { reduxStore } from './store';
 import { MainPage, GamePage, ErrorPage } from './pages';
-import { Spinner } from './components';
 import './index.css';
 
 export enum Routes {
-    MAIN = '/frontend-avito-tech-test-assignment',
+    MAIN = '/frontend-avito-tech-test-assignment/',
     GAME = '/frontend-avito-tech-test-assignment/game/:id',
+    ERROR = '/frontend-avito-tech-test-assignment/error',
 }
 
 const router = createBrowserRouter([
@@ -24,14 +23,17 @@ const router = createBrowserRouter([
         element: <GamePage />,
         errorElement: <ErrorPage />,
     },
+    {
+        path: Routes.ERROR,
+        element: <ErrorPage />,
+        errorElement: <ErrorPage />,
+    },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <StoreProvider store={reduxStore}>
-            <PersistGate loading={<Spinner />} persistor={persistor}>
-                <RouterProvider router={router} />
-            </PersistGate>
+            <RouterProvider router={router} />
         </StoreProvider>
     </React.StrictMode>,
 );
