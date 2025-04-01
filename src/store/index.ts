@@ -2,7 +2,6 @@ export {
     useDispatch,
     useSelector,
     reduxStore,
-    persistor,
     type ReduxState
 } from './store';
 export {

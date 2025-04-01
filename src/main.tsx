@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider as StoreProvider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { reduxStore, persistor } from './store';
+import { reduxStore } from './store';
 import { MainPage, GamePage, ErrorPage } from './pages';
-import { Spinner } from './components';
 import './index.css';
 
 export enum Routes {
@@ -35,9 +33,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <StoreProvider store={reduxStore}>
-            <PersistGate loading={<Spinner />} persistor={persistor}>
-                <RouterProvider router={router} />
-            </PersistGate>
+            <RouterProvider router={router} />
         </StoreProvider>
     </React.StrictMode>,
 );
